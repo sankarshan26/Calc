@@ -23,19 +23,75 @@ function App() {
   };
 
   const handleCalculate = () => {
-    try {
-      setExpression(eval(expression).toString());
-    } catch (error) {
-      setExpression("Error");
+    var opr = "";
+    var a1 = "";
+    var a2 = "";
+    var f = 0;
+    console.log(expression);
+    for (var i = 0; i < expression.length; i++) {
+      if (f === 1) {
+        if (expression[i] === "+") {
+          if (opr === "+") a1=((a1*1) + (a2*1) + "");
+          else if (opr === "-") a1=((a1*1) - (a2*1) + "");
+          else if (opr === "*") a1=((a1*1) * (a2*1) + "");
+          else if (opr === "/") a1=((a1*1) / (a2*1) + "");
+          opr="+";
+          a2=''
+        }
+        else if (expression[i] === "-") {
+          if (opr === "+") a1=((a1*1) + (a2*1) + "");
+          else if (opr === "-") a1=((a1*1) - (a2*1) + "");
+          else if (opr === "*") a1=((a1*1) * (a2*1) + "");
+          else if (opr === "/") a1=((a1*1) / (a2*1) + "");
+          opr="-";
+          a2=''
+        }
+        else if (expression[i] === "*") {
+          if (opr === "+") a1=((a1*1) + (a2*1) + "");
+          else if (opr === "-") a1=((a1*1) - (a2*1) + "");
+          else if (opr === "*") a1=((a1*1) * (a2*1) + "");
+          else if (opr === "/") a1=((a1*1) / (a2*1) + "");
+          opr="*";
+          a2=''
+        }
+        else if (expression[i] === "/") {
+          if (opr === "+") a1=((a1*1) + (a2*1) + "");
+          else if (opr === "-") a1=((a1*1) - (a2*1) + "");
+          else if (opr === "*") a1=((a1*1) * (a2*1) + "");
+          else if (opr === "/") a1=((a1*1) / (a2*1) + "");
+          opr="/";
+          a2=''
+        }
+        else {
+          a2+=expression[i];
+        }
+      } else {
+        if (expression[i] === "+") { opr = expression[i]; f=1;}
+        else if (expression[i] === "-") { opr = expression[i]; f=1;}
+        else if (expression[i] === "*") { opr = expression[i]; f=1;}
+        else if (expression[i] === "/") { opr = expression[i]; f=1;}
+        else if (opr === "") {
+          a1 += expression[i];
+        } else {
+          a2 += expression[i];
+        }
+      }
     }
+    a1 = a1 * 1;
+    a2 = a2 * 1;
+    console.log(typeof (a1 + a2));
+    if (opr === "+") setExpression(a1 + a2 + "");
+    else if (opr === "-") setExpression(a1 - a2 + "");
+    else if (opr === "*") setExpression(a1 * a2 + "");
+    else if (opr === "/") setExpression(a1 / a2 + "");
   };
 
   return (
-    <div className="App" style={{"background-color":"#E0FFFF"}}>
+    <div className="App" style={{ "background-color": "#E0FFFF" }}>
       <Container className="calculator-container ">
-        <Row >
+        <Row>
           <Col>
-            <div className={`calculator ${darkMode ? "bg-dark" : "bg-light"}`} >
+            <div className={`calculator ${darkMode ? "bg-dark" : "bg-light"}`}>
               <div className="toggle-button">
                 <label className="switch">
                   <input
@@ -94,7 +150,9 @@ function App() {
                     <Button
                       variant="light"
                       onClick={() => handleButtonClick("/")}
-                      className={`${darkMode ? "bg-dark" : "bg-light"} text-primary fs-5`}
+                      className={`${
+                        darkMode ? "bg-dark" : "bg-light"
+                      } text-primary fs-5`}
                     >
                       /
                     </Button>
@@ -138,7 +196,9 @@ function App() {
                     <Button
                       variant="light"
                       onClick={() => handleButtonClick("*")}
-                      className={`${darkMode ? "bg-dark" : "bg-light"} text-primary fs-5`}
+                      className={`${
+                        darkMode ? "bg-dark" : "bg-light"
+                      } text-primary fs-5`}
                     >
                       *
                     </Button>
@@ -182,7 +242,9 @@ function App() {
                     <Button
                       variant="light"
                       onClick={() => handleButtonClick("-")}
-                      className={`${darkMode ? "bg-dark" : "bg-light"} text-primary fs-5`}
+                      className={`${
+                        darkMode ? "bg-dark" : "bg-light"
+                      } text-primary fs-5`}
                     >
                       -
                     </Button>
@@ -215,7 +277,9 @@ function App() {
                     <Button
                       variant="light"
                       onClick={() => handleCalculate()}
-                      className={`${darkMode ? "bg-dark" : "bg-light"}  text-success`}
+                      className={`${
+                        darkMode ? "bg-dark" : "bg-light"
+                      }  text-success`}
                     >
                       =
                     </Button>
@@ -224,7 +288,9 @@ function App() {
                     <Button
                       variant="light"
                       onClick={() => handleButtonClick("+")}
-                      className={`${darkMode ? "bg-dark" : "bg-light"} text-primary`}
+                      className={`${
+                        darkMode ? "bg-dark" : "bg-light"
+                      } text-primary`}
                     >
                       +
                     </Button>
